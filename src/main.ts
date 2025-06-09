@@ -4,6 +4,7 @@ import { JobDescriptionModal } from './modals/JobDescriptionModal';
 import { createCV } from './services/createNewCV';
 import { extractAndFormat } from './services/extractAndFormat';
 import { CVMakerSettings } from './types';
+import { CVMakerSettingTab } from './settings/CVMakerSettingTab';
 
 const DEFAULT_SETTINGS: CVMakerSettings = {
     baseUrl: '',
@@ -18,6 +19,7 @@ export default class CVMaker extends Plugin {
 
     async onload() {
         await this.loadSettings();
+        this.addSettingTab(new CVMakerSettingTab(this.app, this))
 
         // This creates an icon in the left ribbon.
         this.addRibbonIcon('newspaper', 'Create a new cv', async () => {
