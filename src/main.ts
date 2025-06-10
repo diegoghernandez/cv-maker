@@ -1,4 +1,4 @@
-import { Notice, Plugin, TFolder } from "obsidian";
+import { Notice, Plugin, TFile, TFolder } from "obsidian";
 import { BaseCVModal } from "./modals/BaseCVModal";
 import { JobDescriptionModal } from "./modals/JobDescriptionModal";
 import { createCV } from "./services/createNewCV";
@@ -65,7 +65,7 @@ export default class CVMaker extends Plugin {
                   const [error, result] = await createCV({
                      cvPrompt: {
                         resume: await vault.cachedRead(
-                           vault.getFileByPath(BASE_CV_PATH),
+                           vault.getFileByPath(BASE_CV_PATH) as TFile,
                         ),
                         jobDescription,
                      },
