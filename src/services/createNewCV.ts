@@ -3,9 +3,9 @@ import { generateText } from "ai";
 import { CVMakerSettings } from "src/types";
 
 type Prompt = {
-   resume: string,
-   jobDescription: string
-}
+   resume: string;
+   jobDescription: string;
+};
 
 const prompt = ({ resume, jobDescription }: Prompt) => `
 [RESUME]=${resume}
@@ -35,7 +35,7 @@ Ensure the updated resume emphasizes the relevant skills, experiences, and quali
 ~
 
 Step 5: Review the updated resume for clarity, conciseness, and impact. Provide any final recommendations for improvement.
-`
+`;
 /*
 where each time that you add data, you should don't delete the original data and surround it with this span tags: <span style="color:red;"></span>
 and then the added data at this span tags <span style="color:green;"></span>
@@ -75,25 +75,32 @@ Resume:[RESUME]
 */
 
 interface Params {
-   cvPrompt: Prompt
-   settings: CVMakerSettings
+   cvPrompt: Prompt;
+   settings: CVMakerSettings;
 }
-export function createCV({ cvPrompt, settings }: Params): Promise<[string | null, string]> {
+export function createCV({
+   cvPrompt,
+   settings,
+}: Params): Promise<[string | null, string]> {
    const provider = createOpenAICompatible({
-      name: 'llama.cpp',
+      name: "llama.cpp",
       baseURL: settings.baseUrl,
-      apiKey: settings.apiKey
-   })
+      apiKey: settings.apiKey,
+   });
 
    return generateText({
       model: provider(settings.model),
-      prompt: prompt(cvPrompt)
-   }).then((value) => [null, value.text] as [null, string])
+      prompt: prompt(cvPrompt),
+   })
+      .then((value) => [null, value.text] as [null, string])
       .catch((error) => {
          if (error instanceof Error) {
-            return [error.message, 'Ensure that the sever of your choose is running correctly']
+            return [
+               error.message,
+               "Ensure that the sever of your choose is running correctly",
+            ];
          }
 
-         return ['Failure with the request', '']
-      })
+         return ["Failure with the request", ""];
+      });
 }

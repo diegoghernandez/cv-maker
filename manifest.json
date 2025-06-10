@@ -1,11 +1,11 @@
 {
-	"id": "cv-maker",
-	"name": "CV Maker",
-	"version": "0.1.0",
-	"minAppVersion": "0.15.0",
-	"description": "Tailored your resume to the job description with AI",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+   "id": "cv-maker",
+   "name": "CV Maker",
+   "version": "0.1.0",
+   "minAppVersion": "0.15.0",
+   "description": "Tailored your resume to the job description with AI",
+   "author": "Obsidian",
+   "authorUrl": "https://obsidian.md",
+   "fundingUrl": "https://obsidian.md/pricing",
+   "isDesktopOnly": false
 }

@@ -1,6 +1,6 @@
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible"
-import { generateText } from "ai"
-import { CVMakerSettings } from "src/types"
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
+import { CVMakerSettings } from "src/types";
 
 const prompt = ({ resume }: { resume: string }) => `
 [RESUME]:${resume}
@@ -41,29 +41,36 @@ in markdown, removing the everything except the domain and top level domain in t
 - **[SKILL_CATEGORY][0]**: [RESPECTIVE_SKILLS]
 - **[SKILL_CATEGORY][1]**: [RESPECTIVE_SKILLS]
 - **[SKILL_CATEGORY][...]**: [RESPECTIVE_SKILLS]
-`
+`;
 
 interface Params {
-   resume: string
-   settings: CVMakerSettings
+   resume: string;
+   settings: CVMakerSettings;
 }
 
-export function extractAndFormat({ resume, settings }: Params): Promise<[string | null, string]> {
+export function extractAndFormat({
+   resume,
+   settings,
+}: Params): Promise<[string | null, string]> {
    const provider = createOpenAICompatible({
-      name: 'llama.cpp',
+      name: "llama.cpp",
       baseURL: settings.baseUrl,
-      apiKey: settings.apiKey
-   })
+      apiKey: settings.apiKey,
+   });
 
    return generateText({
       model: provider(settings.model),
-      prompt: prompt({ resume })
-   }).then((value) => [null, value.text] as [null, string])
+      prompt: prompt({ resume }),
+   })
+      .then((value) => [null, value.text] as [null, string])
       .catch((error) => {
          if (error instanceof Error) {
-            return [error.message, 'Ensure that the sever of your choose is running correctly']
+            return [
+               error.message,
+               "Ensure that the sever of your choose is running correctly",
+            ];
          }
 
-         return ['Request failure', '']
-      })
+         return ["Request failure", ""];
+      });
 }
