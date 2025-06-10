@@ -1,6 +1,6 @@
 # CV Maker plugin for obsidian
 
-Make use of an OpenAI API compatible to
+Make use of an OpenAI API compatible to:
 
 - Transform your CV information to markdown in a specific format
 - Adjust your CV to any job description
